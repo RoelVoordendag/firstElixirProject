@@ -11,10 +11,13 @@ defmodule FirstElixirProjectWeb.ExperienceView do
   end
 
   def render("experience.json", %{experience: experience}) do
-    %{id: experience.id,
+    %{
+      id: experience.id,
       companyName: experience.companyName,
       description: experience.description,
       from: experience.from,
-      tilllocation: experience.tilllocation}
+      location: experience.location,
+      till: experience.till
+    }
   end
 end
