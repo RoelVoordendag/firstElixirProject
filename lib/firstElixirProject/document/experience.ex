@@ -6,7 +6,8 @@ defmodule FirstElixirProject.Document.Experience do
     field :companyName, :string
     field :description, :string
     field :from, :date
-    field :tilllocation, :string
+    field :till, :date
+    field :location, :string
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule FirstElixirProject.Document.Experience do
   @doc false
   def changeset(experience, attrs) do
     experience
-    |> cast(attrs, [:companyName, :description, :from, :tilllocation])
-    |> validate_required([:companyName, :description, :from, :tilllocation])
+    |> cast(attrs, [:companyName, :description, :location, :from, :till])
+    |> validate_required([:companyName, :description, :location, :from, :till])
   end
 end

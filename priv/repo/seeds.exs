@@ -9,3 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+alias FirstElixirProject.Repo
+alias FirstElixirProject.Directory.Business
+
+# Repo.insert! %Experience{companyName: "koolhaas", "description": "plukker" }
