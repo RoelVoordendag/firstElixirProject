@@ -9,6 +9,10 @@ defmodule FirstElixirProjectWeb.Router do
     pipe_through :api
   end
 
+  scope "/", FirstElixirProjectWeb do
+    get "/", DefaultController, :index
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
