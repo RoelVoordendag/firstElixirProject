@@ -11,6 +11,7 @@ defmodule FirstElixirProjectWeb.Router do
 
   scope "/", FirstElixirProjectWeb do
     get "/", DefaultController, :index
+    resources "/experience", ExperienceController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
