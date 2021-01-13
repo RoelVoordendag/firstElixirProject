@@ -1,7 +1,7 @@
 defmodule FirstElixirProjectWeb.DefaultController do
-    use FirstElixirProjectWeb, :controller
+  use FirstElixirProjectWeb, :controller
 
-    def index(conn, _params) do
-        text conn, "lmao"
-    end
-end 
+  def index(conn, _params) do
+    text(conn, "lmao")
+  end
+end

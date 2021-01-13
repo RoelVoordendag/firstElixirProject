@@ -14,6 +14,11 @@ defmodule FirstElixirProjectWeb.Router do
     resources "/experience", ExperienceController, except: [:new, :edit]
   end
 
+  scope "/users", FirstElixirProjectWeb do
+    post "/signup", UserController, :create
+    post "/sigin", UserController, :signin
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
