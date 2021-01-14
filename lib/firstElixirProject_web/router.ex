@@ -7,7 +7,7 @@ defmodule FirstElixirProjectWeb.Router do
 
   # Add pipe_through to routes to add bearer auth to route
   pipeline :auth do
-    plug BusiApiWeb.Auth.Pipeline
+    plug FirstElixirProjectWeb.Auth.Pipeline
   end
 
   scope "/api", FirstElixirProjectWeb do
