@@ -21,4 +21,10 @@ defmodule FirstElixirProjectWeb.FallbackController do
     |> put_view(FirstElixirProjectWeb.ErrorView)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(BusiApiWeb.ErrorView, :"401")
+  end
 end

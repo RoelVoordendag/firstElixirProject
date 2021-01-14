@@ -5,6 +5,11 @@ defmodule FirstElixirProjectWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # Add pipe_through to routes to add bearer auth to route
+  pipeline :auth do
+    plug BusiApiWeb.Auth.Pipeline
+  end
+
   scope "/api", FirstElixirProjectWeb do
     pipe_through :api
   end
@@ -16,7 +21,7 @@ defmodule FirstElixirProjectWeb.Router do
 
   scope "/users", FirstElixirProjectWeb do
     post "/signup", UserController, :create
-    post "/sigin", UserController, :signin
+    post "/signin", UserController, :signin
   end
 
   # Enables LiveDashboard only for development
