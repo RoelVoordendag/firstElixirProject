@@ -1,4 +1,7 @@
 defmodule FirstElixirProjectWeb.ExperienceController do
+  alias FirstElixirProjectWeb.CityController
+  require Logger
+
   use FirstElixirProjectWeb, :controller
 
   alias FirstElixirProject.Document
@@ -12,12 +15,15 @@ defmodule FirstElixirProjectWeb.ExperienceController do
   end
 
   def create(conn, %{"experience" => experience_params}) do
-    with {:ok, %Experience{} = experience} <- Document.create_experience(experience_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.experience_path(conn, :show, experience))
-      |> render("show.json", experience: experience)
-    end
+    Logger.info(CityController.create("test"))
+    Process.exit()
+
+    # with {:ok, %Experience{} = experience} <- Document.create_experience(experience_params) do
+    #   conn
+    #   |> put_status(:created)
+    #   |> put_resp_header("location", Routes.experience_path(conn, :show, experience))
+    #   |> render("show.json", experience: experience)
+    # end
   end
 
   def show(conn, %{"id" => id}) do
@@ -28,7 +34,8 @@ defmodule FirstElixirProjectWeb.ExperienceController do
   def update(conn, %{"id" => id, "experience" => experience_params}) do
     experience = Document.get_experience!(id)
 
-    with {:ok, %Experience{} = experience} <- Document.update_experience(experience, experience_params) do
+    with {:ok, %Experience{} = experience} <-
+           Document.update_experience(experience, experience_params) do
       render(conn, "show.json", experience: experience)
     end
   end

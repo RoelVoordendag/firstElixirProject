@@ -1,4 +1,7 @@
 defmodule FirstElixirProjectWeb.CityController do
+  require Logger
+  require String.Chars
+
   use FirstElixirProjectWeb, :controller
 
   alias FirstElixirProject.Document
@@ -11,13 +14,20 @@ defmodule FirstElixirProjectWeb.CityController do
     render(conn, "index.json", city: city)
   end
 
-  def create(conn, %{"city" => city_params}) do
-    with {:ok, %City{} = city} <- Document.create_city(city_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.city_path(conn, :show, city))
-      |> render("show.json", city: city)
-    end
+  #  RETURN TRUE HERE AND MAKE CITY
+  def create(location) do
+    Logger.info(location)
+
+    if true, do: 1, else: 2
+
+    # Process.exit()
+
+    # with {:ok, %City{} = city} <- Document.create_city(city_params) do
+    #   conn
+    #   |> put_status(:created)
+    #   |> put_resp_header("location", Routes.city_path(conn, :show, city))
+    #   |> render("show.json", city: city)
+    # end
   end
 
   def show(conn, %{"id" => id}) do

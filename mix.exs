@@ -42,6 +42,7 @@ defmodule FirstElixirProject.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:poison, "~> 3.1"},
       {:guardian, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 4.0"},

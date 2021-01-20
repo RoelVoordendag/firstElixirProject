@@ -16,7 +16,7 @@ defmodule FirstElixirProjectWeb.Router do
 
   scope "/", FirstElixirProjectWeb do
     get "/", DefaultController, :index
-    resources "/experience", ExperienceController, except: [:new, :edit]
+    resources "/experience", ExperienceController, except: [:edit]
   end
 
   scope "/users", FirstElixirProjectWeb do

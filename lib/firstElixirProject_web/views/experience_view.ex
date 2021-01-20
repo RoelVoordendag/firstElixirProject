@@ -16,7 +16,6 @@ defmodule FirstElixirProjectWeb.ExperienceView do
       companyName: experience.companyName,
       description: experience.description,
       from: experience.from,
-      location: experience.location,
       till: experience.till
     }
   end
