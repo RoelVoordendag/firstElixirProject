@@ -7,7 +7,7 @@ defmodule FirstElixirProject.Document.Experience do
     field :description, :string
     field :from, :date
     field :till, :date
-    field :location, :string
+    field :location_id, :integer
 
     timestamps()
   end

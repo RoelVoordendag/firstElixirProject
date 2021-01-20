@@ -67,4 +67,69 @@ defmodule FirstElixirProject.DocumentTest do
       assert %Ecto.Changeset{} = Document.change_experience(experience)
     end
   end
+
+  describe "city" do
+    alias FirstElixirProject.Document.City
+
+    @valid_attrs %{image: "some image", lat: "120.5", lon: "120.5", name: "some name"}
+    @update_attrs %{image: "some updated image", lat: "456.7", lon: "456.7", name: "some updated name"}
+    @invalid_attrs %{image: nil, lat: nil, lon: nil, name: nil}
+
+    def city_fixture(attrs \\ %{}) do
+      {:ok, city} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Document.create_city()
+
+      city
+    end
+
+    test "list_city/0 returns all city" do
+      city = city_fixture()
+      assert Document.list_city() == [city]
+    end
+
+    test "get_city!/1 returns the city with given id" do
+      city = city_fixture()
+      assert Document.get_city!(city.id) == city
+    end
+
+    test "create_city/1 with valid data creates a city" do
+      assert {:ok, %City{} = city} = Document.create_city(@valid_attrs)
+      assert city.image == "some image"
+      assert city.lat == Decimal.new("120.5")
+      assert city.lon == Decimal.new("120.5")
+      assert city.name == "some name"
+    end
+
+    test "create_city/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Document.create_city(@invalid_attrs)
+    end
+
+    test "update_city/2 with valid data updates the city" do
+      city = city_fixture()
+      assert {:ok, %City{} = city} = Document.update_city(city, @update_attrs)
+      assert city.image == "some updated image"
+      assert city.lat == Decimal.new("456.7")
+      assert city.lon == Decimal.new("456.7")
+      assert city.name == "some updated name"
+    end
+
+    test "update_city/2 with invalid data returns error changeset" do
+      city = city_fixture()
+      assert {:error, %Ecto.Changeset{}} = Document.update_city(city, @invalid_attrs)
+      assert city == Document.get_city!(city.id)
+    end
+
+    test "delete_city/1 deletes the city" do
+      city = city_fixture()
+      assert {:ok, %City{}} = Document.delete_city(city)
+      assert_raise Ecto.NoResultsError, fn -> Document.get_city!(city.id) end
+    end
+
+    test "change_city/1 returns a city changeset" do
+      city = city_fixture()
+      assert %Ecto.Changeset{} = Document.change_city(city)
+    end
+  end
 end
