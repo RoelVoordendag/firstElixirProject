@@ -3,6 +3,7 @@ defmodule FirstElixirProjectWeb.CityController do
   require String.Chars
   require HTTPoison
   require System
+  require Poison
 
   use FirstElixirProjectWeb, :controller
 
@@ -17,13 +18,15 @@ defmodule FirstElixirProjectWeb.CityController do
   end
 
   def getImageSplashUrl(queryTerm) do
+    Logger.info("SEARCH TERM #{queryTerm}")
+
     case HTTPoison.get(
            "https://api.unsplash.com/search/photos/?client_id=#{
              System.get_env("CLIENT_ID_UNSPLASh")
            }query=#{queryTerm}"
          ) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        body
+        Poison.decode!(body)
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         false
@@ -46,7 +49,7 @@ defmodule FirstElixirProjectWeb.CityController do
 
   #  RETURN TRUE HERE AND MAKE CITY
   def create(location) do
-    getImageSplashUrl(location)
+    hd(getImageSplashUrl(location)["results"])["urls"]["regular"]
 
     # if false, do: 1, else: 2
 
