@@ -1,6 +1,7 @@
 defmodule FirstElixirProjectWeb.ExperienceController do
   alias FirstElixirProjectWeb.CityController
   require Logger
+  require Map
 
   use FirstElixirProjectWeb, :controller
 
@@ -15,8 +16,12 @@ defmodule FirstElixirProjectWeb.ExperienceController do
   end
 
   def create(conn, %{"experience" => experience_params}) do
-    Logger.info(CityController.create(experience_params["location"]))
-    Process.exit()
+    experience_params =
+      Map.put(
+        experience_params,
+        "location_id",
+        CityController.create(experience_params["location"])
+      )
 
     # Insert new item and show id as last
     with {:ok, %Experience{} = experience} <- Document.create_experience(experience_params) do

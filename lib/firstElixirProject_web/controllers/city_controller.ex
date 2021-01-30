@@ -40,16 +40,16 @@ defmodule FirstElixirProjectWeb.CityController do
   def create(location) do
     hd(getImageSplashUrl(location)["results"])["urls"]["regular"]
 
-    # if false, do: 1, else: 2
-
-    # Process.exit()
-
-    # with {:ok, %City{} = city} <- Document.create_city(city_params) do
-    #   conn
-    #   |> put_status(:created)
-    #   |> put_resp_header("location", Routes.city_path(conn, :show, city))
-    #   |> render("show.json", city: city)
-    # end
+    # return id
+    with {:ok, %City{} = city} <-
+           FirstElixirProject.Document.create_city(%{
+             "name" => location,
+             "image" => hd(getImageSplashUrl(location)["results"])["urls"]["regular"],
+             "lat" => 1,
+             "lon" => 1
+           }) do
+      city.id
+    end
   end
 
   def show(conn, %{"id" => id}) do

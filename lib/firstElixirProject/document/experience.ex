@@ -15,7 +15,7 @@ defmodule FirstElixirProject.Document.Experience do
   @doc false
   def changeset(experience, attrs) do
     experience
-    |> cast(attrs, [:companyName, :description, :from, :till])
-    |> validate_required([:companyName, :description, :from, :till])
+    |> cast(attrs, [:companyName, :description, :from, :till, :location_id])
+    |> validate_required([:companyName, :description, :from, :till, :location_id])
   end
 end
