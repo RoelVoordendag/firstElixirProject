@@ -15,7 +15,7 @@ defmodule FirstElixirProjectWeb.ExperienceController do
   end
 
   def create(conn, %{"experience" => experience_params}) do
-    Logger.info(CityController.create("test"))
+    Logger.info(CityController.create(experience_params["location"]))
     Process.exit()
 
     # Insert new item and show id as last

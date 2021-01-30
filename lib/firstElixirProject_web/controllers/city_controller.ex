@@ -23,7 +23,7 @@ defmodule FirstElixirProjectWeb.CityController do
     case HTTPoison.get(
            "https://api.unsplash.com/search/photos/?client_id=#{
              System.get_env("CLIENT_ID_UNSPLASh")
-           }query=#{queryTerm}"
+           }&query=#{queryTerm}"
          ) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         Poison.decode!(body)
@@ -34,17 +34,6 @@ defmodule FirstElixirProjectWeb.CityController do
       {:error, %HTTPoison.Error{reason: reason}} ->
         exit(reason)
     end
-
-    # case HTTPoison.get(url) do
-    #   {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-    #     IO.puts(body)
-
-    #   {:ok, %HTTPoison.Response{status_code: 404}} ->
-    #     IO.puts("Not found :(")
-
-    #   {:error, %HTTPoison.Error{reason: reason}} ->
-    #     IO.inspect(reason)
-    # end
   end
 
   #  RETURN TRUE HERE AND MAKE CITY
