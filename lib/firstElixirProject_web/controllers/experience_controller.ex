@@ -18,12 +18,13 @@ defmodule FirstElixirProjectWeb.ExperienceController do
     Logger.info(CityController.create("test"))
     Process.exit()
 
-    # with {:ok, %Experience{} = experience} <- Document.create_experience(experience_params) do
-    #   conn
-    #   |> put_status(:created)
-    #   |> put_resp_header("location", Routes.experience_path(conn, :show, experience))
-    #   |> render("show.json", experience: experience)
-    # end
+    # Insert new item and show id as last
+    with {:ok, %Experience{} = experience} <- Document.create_experience(experience_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", Routes.experience_path(conn, :show, experience))
+      |> render("show.json", experience: experience)
+    end
   end
 
   def show(conn, %{"id" => id}) do

@@ -1,6 +1,7 @@
 defmodule FirstElixirProjectWeb.CityController do
   require Logger
   require String.Chars
+  require HTTPoison
 
   use FirstElixirProjectWeb, :controller
 
@@ -14,11 +15,39 @@ defmodule FirstElixirProjectWeb.CityController do
     render(conn, "index.json", city: city)
   end
 
+  def getImageSplashUrl(queryTerm) do
+    case HTTPoison.get(
+           "https://api.unsplash.com/search/photos/?client_id=dZkwsnIoX-WgNt53r_7ubTCxi297PxKgQgYucfO0zKw&query=#{
+             queryTerm
+           }"
+         ) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        body
+
+      {:ok, %HTTPoison.Response{status_code: 404}} ->
+        false
+
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        exit(reason)
+    end
+
+    # case HTTPoison.get(url) do
+    #   {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+    #     IO.puts(body)
+
+    #   {:ok, %HTTPoison.Response{status_code: 404}} ->
+    #     IO.puts("Not found :(")
+
+    #   {:error, %HTTPoison.Error{reason: reason}} ->
+    #     IO.inspect(reason)
+    # end
+  end
+
   #  RETURN TRUE HERE AND MAKE CITY
   def create(location) do
-    Logger.info(location)
+    getImageSplashUrl(location)
 
-    if true, do: 1, else: 2
+    # if false, do: 1, else: 2
 
     # Process.exit()
 
