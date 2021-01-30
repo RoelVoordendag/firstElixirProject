@@ -2,6 +2,7 @@ defmodule FirstElixirProjectWeb.CityController do
   require Logger
   require String.Chars
   require HTTPoison
+  require System
 
   use FirstElixirProjectWeb, :controller
 
@@ -17,9 +18,9 @@ defmodule FirstElixirProjectWeb.CityController do
 
   def getImageSplashUrl(queryTerm) do
     case HTTPoison.get(
-           "https://api.unsplash.com/search/photos/?client_id=dZkwsnIoX-WgNt53r_7ubTCxi297PxKgQgYucfO0zKw&query=#{
-             queryTerm
-           }"
+           "https://api.unsplash.com/search/photos/?client_id=#{
+             System.get_env("CLIENT_ID_UNSPLASh")
+           }query=#{queryTerm}"
          ) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body
